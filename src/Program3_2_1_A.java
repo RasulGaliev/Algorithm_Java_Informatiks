@@ -3,7 +3,7 @@
 
 import java.util.Scanner;
 
-public class Program3_2_1 {
+public class Program3_2_1_A {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         int N = in.nextInt();
