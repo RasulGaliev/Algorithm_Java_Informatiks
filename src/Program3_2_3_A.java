@@ -3,7 +3,7 @@
 
 import java.util.Scanner;
 
-public class Program3_2_3 {
+public class Program3_2_3_A {
     static int SumOfDigits (int n) {
         int s = 0;
         while (n != 0) {
