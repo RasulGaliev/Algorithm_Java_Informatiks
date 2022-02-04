@@ -3,7 +3,7 @@
 
 import java.util.Scanner;
 
-public class Program4_2_1{
+public class Program4_2_1_A{
     static boolean IsDijit(char c) {
         if(c >= '0' && c <= '9')
             return true;

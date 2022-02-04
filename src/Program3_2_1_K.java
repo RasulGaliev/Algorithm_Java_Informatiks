@@ -8,86 +8,135 @@ public class Program3_2_1_K {
         int A = in.nextInt();
         int B = in.nextInt();
         int N = in.nextInt();
-
-        if(A == N)
-            System.out.print(">A" + "\n");
-        else if(B == N)
-            System.out.print(">B" + "\n");
-        else if(A < N && N < B && N % A == 0 && (N <= B / 2 || B % A != 0)){
-            int S = 0;
+        int min, max;
+        int S;
+        String min_str, max_str;
+        if(A >= B){
+            max = A;
+            min = B;
+            max_str = "A";
+            min_str = "B";
+        }
+        else {
+            max = B;
+            min = A;
+            max_str = "B";
+            min_str = "A";
+        }
+        if(N > max)
+            System.out.print("Impossible");
+        else if(N == A)
+            System.out.print(">A");
+        else if(N == B)
+            System.out.print(">B");
+        else if(N == max % min){
+            S = max;
+            System.out.print(">" + max_str + "\n");
             while(S != N){
-                System.out.print(">A" + "\n");
-                System.out.print("A>B" + "\n");
-                S += A;
+                System.out.print(max_str + ">" + min_str + "\n");
+                System.out.print(min_str + ">" + "\n");
+                S -= min;
             }
         }
-        else if(A < N && N < B && (B % A == 0 || (B - N) % A == 0)) {
-            int S = B;
-            System.out.print(">B" + "\n");
-            while(S - A != N){
-                System.out.print("B>A" + "\n");
-                //System.out.print("A>" + "\n");
-                S -= A;
+        else if(N == min - max % min){
+            S = 0;
+            while(S < max){
+                System.out.print(">" + min_str + "\n");
+                System.out.print(min_str + ">" + max_str + "\n");
+                S += min;
             }
-            System.out.print("B>A");
         }
-
-        else if(B < N && N < A && N % B == 0 && (N <= A / 2 || A % B != 0)) {
-            int S = 0;
+        else if(N % min == 0 && ((max - N) %  min != 0 || N <= max / 2)) {
+            S = 0;
             while(S != N){
-                System.out.print(">B" + "\n");
-                System.out.print("B>A" + "\n");
-                S += B;
+                System.out.print(">" + min_str + "\n");
+                System.out.print(min_str + ">" + max_str + "\n");
+                S += min;
             }
         }
-        else if(B < N && N < A && (A % B == 0 || (A - N) % B == 0)){
-            int S = A;
-            System.out.print(">A" + "\n");
-            while(S - B != N){
-                System.out.print("A>B" + "\n");
-                //System.out.print("B>" + "\n");
-                S -= B;
-            }
-            System.out.print("A>B");
-        }
-        else if(N < A && A < B && A - B % A == N){
-            int S = 0;
-            while(S < B) {
-                System.out.print(">A" + "\n");
-                System.out.print("A>B" + "\n");
-                S += A;
+        else if((max - N) %  min == 0) {
+            S = max;
+            System.out.print(">" + max_str + "\n");
+            while(S != N){
+                System.out.print(max_str + ">" + min_str + "\n");
+                System.out.print(min_str + ">" + "\n");
+                S -= min;
             }
         }
-        else if(N < B && A > B && B - A % B == N){
-            int S = B;
-            while(S < A){
-                System.out.print(">B" + "\n");
-                System.out.print("B>A" + "\n");
-                S += B;
+        else if((N - (min - max % min)) %  min == 0) {
+            S = 0;
+            while(S < max){
+                System.out.print(">" + min_str + "\n");
+                System.out.print(min_str + ">" + max_str + "\n");
+                S += min;
+            }
+            System.out.print(max_str + ">" + "\n");
+            System.out.print(min_str + ">" + max_str + "\n");
+            S = min - max % min;
+            while(S != N){
+                System.out.print(">" + min_str + "\n");
+                System.out.print(min_str + ">" + max_str + "\n");
+                S += min;
+            }
+
+        }
+        /*else if((N - max % min) %  min == 0) {
+            S = max;
+            System.out.print(">" + max_str + "\n");
+            while (S != N) {
+                System.out.print(max_str + ">" + min_str + "\n");
+                System.out.print(min_str + ">" + "\n");
+                S -= min;
+            }
+            S = max % min;
+            while (S != N) {
+                System.out.print(">" + min_str + "\n");
+                System.out.print(min_str + ">" + max_str + "\n");
+                S += min;
+            }
+        }*/
+        else if((max - (min - max % min)) %  min == N) {
+            S = 0;
+            while(S < max) {
+                System.out.print(">" + min_str + "\n");
+                System.out.print(min_str + ">" + max_str + "\n");
+                S += min;
+            }
+            S = max - (min - max % min);
+            System.out.print(max_str + ">" + "\n");
+            System.out.print(min_str + ">" + max_str + "\n");
+            while (S >= N) {
+                System.out.print(">" + min_str + "\n");
+                System.out.print(min_str + ">" + max_str + "\n");
+                S -= min;
             }
         }
-        else if(N < A && A < B && B % A == N){
-            int S = A;
-            System.out.print(">B" + "\n");
-            while(S + A < B){
-                System.out.print("B>A" + "\n");
-                //System.out.print("A>" + "\n");
-                S += A;
+        /// не додел
+        else if((max - (min - max % min)) %  min == N % min) {
+            S = 0;
+            while(S < max) {
+                System.out.print(">" + min_str + "\n");
+                System.out.print(min_str + ">" + max_str + "\n");
+                S += min;
             }
-            System.out.print("B>A");
-        }
-        else if(A > B && B > N && A % B == N){
-            int S = B;
-            System.out.print(">A" + "\n");
-            while(S + B < A) {
-                System.out.print("A>B" + "\n");
-                //System.out.print("B>" + "\n");
-                S += B;
+            S = max - (min - max % min);
+            System.out.print(max_str + ">" + "\n");
+            System.out.print(min_str + ">" + max_str + "\n");
+            while (S > 0) {
+                System.out.print(">" + min_str + "\n");
+                System.out.print(min_str + ">" + max_str + "\n");
+                S -= min;
             }
-            System.out.print("A>B");
+            S = max - (min - max % min);
+            System.out.print(max_str + ">" + "\n");
+            System.out.print(min_str + ">" + max_str + "\n");
+            while (S > 0) {
+                System.out.print(">" + min_str + "\n");
+                System.out.print(min_str + ">" + max_str + "\n");
+                S -= min;
+            }
         }
         else
             System.out.print("Impossible");
-        in.close();
     }
 }
